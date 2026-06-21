@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日常翻阅 · bet365 阅读笔记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f6f2eb;   /* 米白基调 */
+            font-family: 'Georgia', 'Times New Roman', '宋体', SimSun, serif;
+            color: #3a3530;
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+
+        .paper {
+            max-width: 860px;
+            margin: 0 auto;
+            background-color: #fcfaf7;
+            border-radius: 24px;
+            box-shadow: 0 8px 28px rgba(100, 80, 60, 0.06);
+            padding: 2.8rem 2.2rem;
+        }
+
+        @media (max-width: 580px) {
+            .paper {
+                padding: 1.8rem 1.2rem;
+                border-radius: 16px;
+            }
+        }
+
+        /* 开场 —— 像摘录卡 */
+        .opening-note {
+            background: #ede7df;
+            padding: 2rem 2rem 1.8rem;
+            border-radius: 40px 8px 40px 8px;
+            margin-bottom: 2.5rem;
+        }
+
+        .opening-note p {
+            font-size: 1.2rem;
+            letter-spacing: 0.01em;
+            color: #3f3832;
+        }
+
+        .opening-note .small-ornament {
+            display: block;
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+            color: #857a6f;
+            border-top: 1px dashed #ccc3b7;
+            padding-top: 0.6rem;
+        }
+
+        h2 {
+            font-weight: 400;
+            font-size: 1.6rem;
+            margin: 2rem 0 1rem;
+            letter-spacing: -0.01em;
+            border-left: 5px solid #c8b9a8;
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-weight: 400;
+            font-size: 1.2rem;
+            margin: 1.8rem 0 0.8rem;
+            color: #5f554b;
+        }
+
+        .intro-paragraph {
+            margin-bottom: 1.8rem;
+            font-size: 1.02rem;
+        }
+
+        .intro-paragraph a {
+            color: #8b6f4c;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #cfbbaa;
+            transition: color 0.2s;
+        }
+
+        .intro-paragraph a:hover {
+            color: #5c412b;
+            text-decoration-color: #8b6f4c;
+        }
+
+        /* 特点卡片 —— 温和的纸条风格 */
+        .feature-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            background: #f7f3ec;
+            padding: 1.4rem 1.8rem;
+            border-radius: 30px 6px 30px 6px;
+            position: relative;
+            transition: background 0.2s;
+        }
+
+        .feature-item:hover {
+            background: #efe8de;
+        }
+
+        .feature-item strong {
+            display: inline-block;
+            font-weight: 500;
+            color: #5e4a36;
+            font-size: 1.05rem;
+            margin-right: 0.4rem;
+        }
+
+        .feature-item .tag {
+            background: #dacfc3;
+            color: #4d3e2f;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            padding: 0.15rem 0.7rem;
+            border-radius: 30px;
+            margin-left: 0.6rem;
+            vertical-align: middle;
+        }
+
+        /* 场景引用块 */
+        .scene-quote {
+            background: #f0e9e0;
+            padding: 1.6rem 2rem;
+            border-radius: 4px 40px 4px 40px;
+            margin: 2.2rem 0;
+            font-style: normal;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.02);
+        }
+
+        .scene-quote p {
+            margin-bottom: 0.7rem;
+        }
+
+        .scene-quote p:last-child {
+            margin-bottom: 0;
+        }
+
+        .scene-quote .source {
+            display: block;
+            text-align: right;
+            font-size: 0.9rem;
+            color: #7f7164;
+            margin-top: 0.6rem;
+            border-top: 1px solid #dbd1c5;
+            padding-top: 0.6rem;
+        }
+
+        .tip-box {
+            background: #e7ded3;
+            padding: 1.2rem 1.8rem;
+            border-radius: 60px 10px 60px 10px;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+            color: #2e2a26;
+            border-left: 1px solid #cbbcad;
+        }
+
+        .faq-mini {
+            margin: 2.5rem 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .faq-mini details {
+            background: #f4efe8;
+            padding: 0.8rem 1.2rem;
+            border-radius: 30px 6px 30px 6px;
+            cursor: default;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            color: #4a3f35;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .faq-mini summary::before {
+            content: "◌";
+            color: #a28e7a;
+            font-size: 1rem;
+        }
+
+        .faq-mini details p {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #5e5348;
+            padding-left: 0.2rem;
+        }
+
+        @media (max-width: 520px) {
+            .faq-mini {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .gentle-footer {
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid #dfd6cb;
+            font-size: 0.95rem;
+            color: #706358;
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+
+        .gentle-footer a {
+            color: #7a674e;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .gentle-footer a:hover {
+            color: #4f3c29;
+        }
+    </style>
+</head>
+<body>
+<div class="paper">
+
+    <!-- 开场短句 -->
+    <div class="opening-note">
+        <p>偶尔翻开一个页面，就像在书页里夹了一张便签。<br>
+        不需要理由，也不需要目的地。</p>
+        <span class="small-ornament">—— 随手记 · 日常对照</span>
+    </div>
+
+    <!-- 承接段落：日常查询与对照 -->
+    <div class="intro-paragraph">
+        <p>在浏览信息或做一点延伸阅读的时候，常常会打开几个常用的站点，其中一个便是 <a href="https://zhc-bet365.com">bet365</a>。它不像一本正经的工具书，更像手边一本折了角的参考册——赛事动态、规则对照、界面语言的熟悉感，都融在日常碎片里。没有必须完成的任务，只有随手翻看的自然习惯。</p>
+    </div>
+
+    <h2>· 一些特点 ·</h2>
+
+    <!-- 特点列表（温和条目） -->
+    <div class="feature-grid">
+        <div class="feature-item">
+            <strong>赛事覆盖</strong> 从主流联赛到小众杯赛，跨度较大，适合不同偏好的查阅者<span class="tag">对照</span>
+        </div>
+        <div class="feature-item">
+            <strong>信息密度</strong> 页面布局偏向紧凑，对于习惯同时打开多个标签页的人来说，可以快速扫视关键数据
+        </div>
+        <div class="feature-item">
+            <strong>语言选择</strong> 多语言版本减少了阅读障碍，尤其在深夜快速确认赛程时很实用<span class="tag">延伸</span>
+        </div>
+        <div class="feature-item">
+            <strong>规则与说明</strong> 不同项目的规则说明比较细致，适合做规则比对的起点，而非最终答案
+        </div>
+    </div>
+
+    <!-- 引用块：场景示例 -->
+    <div class="scene-quote">
+        <p>“周末下午，随手打开 <a href="https://zhc-bet365.com">bet365</a>，边喝茶边看几场早场赛事的实时数据。不是为了下结论，只是想感受一下比分流动的节奏。页面里的数字、队伍缩写、时间轴——像一种安静的陪伴。”</p>
+        <span class="source">—— 一个普通使用者的午后笔记</span>
+    </div>
+
+    <!-- 温和提示框 -->
+    <div class="tip-box">
+        ⚬ 提示：如果某个联赛的规则细节记不清，或者想对比不同赛事的加时条款，可以把它当作一个快速参照点。同时保持自己的信息交叉验证习惯，总是好的。
+    </div>
+
+    <h3>延伸阅读 · 常见小问题</h3>
+
+    <!-- FAQ 摘要（简约两列） -->
+    <div class="faq-mini">
+        <details>
+            <summary>浏览前需要注册吗？</summary>
+            <p>部分页面可以直接浏览，但有些数据或功能可能需要账户登录后才能展开。具体取决于你想查看的内容层级。</p>
+        </details>
+        <details>
+            <summary>移动端阅读体验如何？</summary>
+            <p>自适应布局做得不错，在手机浏览器上缩放、滑动都比较顺，没有明显的卡顿或排版错乱。</p>
+        </details>
+        <details>
+            <summary>适合用来做实时比分参考吗？</summary>
+            <p>可以作为实时比分来源之一，但建议同时参考官方数据或第三方统计，以获得更立体的信息。</p>
+        </details>
+        <details>
+            <summary>语言切换方便吗？</summary>
+            <p>页面底部或设置菜单内一般有语言选项，切换后大部分内容会跟随变化，比较省心。</p>
+        </details>
+    </div>
+
+    <!-- 温和结尾 -->
+    <div class="gentle-footer">
+        <p>一篇安静的笔记，关于一个日常打开的站点。<br>
+        如果你也喜欢在碎片时间里随手翻翻，或许 <a href="https://zhc-bet365.com">bet365</a> 会成为你书架一隅的常客。</p>
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: #a29587;">—— 仅作为个人阅读与参照记录 · 2025</p>
+    </div>
+
+</div>
+</body>
+</html>
